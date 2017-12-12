@@ -6,13 +6,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Trieda (panel) graficky reprezentujúca nastavenia štetca
+ *
+ * @author Adam Pažičan
+ * @version 2017.12.12
+ */
 public class ToolSettings extends HBox implements Observer {
     private Store store;
 
+    /**
+     * Konštruktor triedy nastavuje vzhľad panela.
+     * Taktiež sa registruje ako sledovateľ triedy Store.
+     */
     public ToolSettings() {
         this.setPadding(new Insets(10, 5, 10, 5));
         this.setSpacing(10);
@@ -24,6 +33,13 @@ public class ToolSettings extends HBox implements Observer {
         renderBrushSettings(this.store.getLineWidth());
     }
 
+    /**
+     * Metóda do panela vykresľuje slider na zmenu veľkosti štetca, label na čiselné zobrazenie veľkosti štetca
+     * a colorPicker na zmenu farby štetca.
+     * O všetkých zmenách informuje Store.
+     *
+     * @param brushSize zakladná veľkosť štetca
+     */
     public void renderBrushSettings(double brushSize) {
         this.getChildren().removeAll();
 
@@ -49,6 +65,12 @@ public class ToolSettings extends HBox implements Observer {
         this.getChildren().addAll(brushSizeSlider, brushSizeLabel, colorPicker);
     }
 
+    /**
+     * Metóda, ktorá sa vykoná, keď sa zmení Store
+     *
+     * @param o sledovaný objekt
+     * @param arg argument/y správy
+     */
     @Override
     public void update(Observable o, Object arg) {
         String[] args = arg.toString().split(" ");
