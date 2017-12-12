@@ -13,10 +13,14 @@ import javafx.stage.Stage;
  * Hlavná trieda programu, ktorá sa stará o inicializáciu scény, plátna a nastavení štetca
  *
  * @author Adam Pažičan
- * @version 1.0.0
+ * @version 2017.12.12
  */
 public class Main extends Application {
 
+    /***
+     * Metóda inicializujúca scénu, plátno, nastavenia štetca
+     * @param primaryStage primárne okno aplikácie
+     */
     @Override
     public void start(Stage primaryStage) {
         BorderPane layout = new BorderPane();
@@ -42,8 +46,8 @@ public class Main extends Application {
     }
 
     /**
-     * Hlavná trieda programu
-     * @param args
+     * Hlavná metóda programu, inicializuje javaFX
+     * @param args argumenty programu
      */
     public static void main(String[] args) {
         launch(args);
