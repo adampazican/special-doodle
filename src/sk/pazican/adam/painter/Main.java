@@ -9,7 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/***
+/**
  * Hlavná trieda programu, ktorá sa stará o inicializáciu scény, plátna a nastavení štetca
  *
  * @author Adam Pažičan
@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    /***
+    /**
      * Metóda inicializujúca scénu, plátno, nastavenia štetca
      * @param primaryStage primárne okno aplikácie
      */
