@@ -1,4 +1,4 @@
-package sample;
+package sk.pazican.adam.painter;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ColorPicker;
@@ -10,10 +10,10 @@ import javafx.scene.paint.Color;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ToolSettings extends HBox implements Observer{
+public class ToolSettings extends HBox implements Observer {
     private Store store;
 
-    public ToolSettings(){
+    public ToolSettings() {
         this.setPadding(new Insets(10, 5, 10, 5));
         this.setSpacing(10);
         this.setStyle("-fx-background-color: #222D32;");
@@ -24,11 +24,11 @@ public class ToolSettings extends HBox implements Observer{
         renderBrushSettings(this.store.getLineWidth());
     }
 
-    public void renderBrushSettings(double brushSize){
+    public void renderBrushSettings(double brushSize) {
         this.getChildren().removeAll();
 
         Label brushSizeLabel = new Label();
-        brushSizeLabel.setPadding(new Insets(5,0,0,5));
+        brushSizeLabel.setPadding(new Insets(5, 0, 0, 5));
         brushSizeLabel.setTextFill(Color.web("#fff"));
         brushSizeLabel.setText(String.valueOf(brushSize));
 
@@ -36,10 +36,10 @@ public class ToolSettings extends HBox implements Observer{
         brushSizeSlider.setMin(0);
         brushSizeSlider.setMax(100);
         brushSizeSlider.setValue(brushSize);
-        brushSizeSlider.setPadding(new Insets(6,0,0,5));
-        brushSizeSlider.valueProperty().addListener((ov, old_val, new_val) -> {
-            this.store.setLineWidth(new_val.intValue());
-            brushSizeLabel.setText(String.valueOf(new_val.intValue()));
+        brushSizeSlider.setPadding(new Insets(6, 0, 0, 5));
+        brushSizeSlider.valueProperty().addListener((ov, oldVal, newVal) -> {
+            this.store.setLineWidth(newVal.intValue());
+            brushSizeLabel.setText(String.valueOf(newVal.intValue()));
         });
 
 
@@ -54,7 +54,7 @@ public class ToolSettings extends HBox implements Observer{
         String[] args = arg.toString().split(" ");
         String operationName = args[0];
 
-        switch (operationName){
+        switch (operationName) {
             case "lineWidth":
                 int operationResult = Integer.valueOf(args[1]);
                 this.renderBrushSettings(operationResult);

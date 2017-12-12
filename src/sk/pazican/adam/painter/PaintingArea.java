@@ -1,4 +1,4 @@
-package sample;
+package sk.pazican.adam.painter;
 
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -7,9 +7,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import sample.Pointers.CirclePointer;
-import sample.Pointers.IPointer;
-import sample.Pointers.SquarePointer;
+import sk.pazican.adam.painter.pointers.CirclePointer;
+import sk.pazican.adam.painter.pointers.IPointer;
+import sk.pazican.adam.painter.pointers.SquarePointer;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -25,10 +25,10 @@ public class PaintingArea extends StackPane implements Observer {
     private final double zoomFactor = 2;
     private Store store;
 
-    public PaintingArea(){
+    public PaintingArea() {
         this.pointer = new CirclePointer(4);
         this.paintingCanvas = new PaintingCanvas(800, 500);
-        this.setStyle("-fx-background-color: #FFFF00;");
+        this.setStyle("-fx-background-color: #FFFFFF;");
         this.setPrefWidth(800);
         this.setPrefHeight(500);
 
@@ -37,7 +37,7 @@ public class PaintingArea extends StackPane implements Observer {
         this.store.setLineWidth(5);
 
 
-        this.getChildren().addAll(this.paintingCanvas, (Node) this.pointer);
+        this.getChildren().addAll(this.paintingCanvas, (Node)this.pointer);
 
         this.setOnMouseMoved(e -> this.onMouseMoved(e));
         this.setOnMouseDragged(e -> this.onMouseDragged(e));
@@ -53,8 +53,8 @@ public class PaintingArea extends StackPane implements Observer {
         String[] args = arg.toString().split(" ");
         String operationName = args[0];
 
-        switch (operationName){
-            case "linewidth":{
+        switch (operationName) {
+            case "linewidth": {
                 int operationResult = Integer.valueOf(args[1]);
                 this.paintingCanvas.setLineWidth(operationResult);
                 this.pointer.setSize(operationResult, operationResult);
@@ -67,19 +67,19 @@ public class PaintingArea extends StackPane implements Observer {
         }
     }
 
-    private void onMouseMoved(MouseEvent e){
+    private void onMouseMoved(MouseEvent e) {
         this.oldX = e.getX();
         this.oldY = e.getY();
         this.pointer.setX(e.getX());
         this.pointer.setY(e.getY());
     }
 
-    private void onMouseDragged(MouseEvent e){
-        if(!this.dragging) {
+    private void onMouseDragged(MouseEvent e) {
+        if (!this.dragging) {
             this.dragging = true;
         }
 
-        switch (e.getButton()){
+        switch (e.getButton()) {
             case PRIMARY:
                 this.paintingCanvas.drawLine(oldX, oldY, e.getX(), e.getY());
                 break;
@@ -98,9 +98,9 @@ public class PaintingArea extends StackPane implements Observer {
         this.pointer.setY(e.getY());
     }
 
-    private void onMouseClicked(MouseEvent e){
-        if(!this.dragging) {
-            switch (e.getButton()){
+    private void onMouseClicked(MouseEvent e) {
+        if (!this.dragging) {
+            switch (e.getButton()) {
                 case PRIMARY:
                     this.paintingCanvas.drawLine(e.getX(), e.getY(), e.getX(), e.getY());
                     break;
@@ -108,8 +108,7 @@ public class PaintingArea extends StackPane implements Observer {
                     this.paintingCanvas.clearLine(e.getX(), e.getY(), e.getX(), e.getY());
                     break;
             }
-        }
-        else {
+        } else {
             this.dragging = false;
         }
 
@@ -117,15 +116,15 @@ public class PaintingArea extends StackPane implements Observer {
         this.pointer = new CirclePointer(this.store.getLineWidth());
         this.pointer.setX(e.getX());
         this.pointer.setY(e.getY());
-        this.getChildren().add((Node) pointer);
+        this.getChildren().add((Node)pointer);
     }
 
-    private void onMouseExited(MouseEvent e){
+    private void onMouseExited(MouseEvent e) {
         this.getScene().setCursor(Cursor.DEFAULT);
         this.pointer.setVisible(false);
     }
 
-    private void onMouseEntered(MouseEvent e){
+    private void onMouseEntered(MouseEvent e) {
         this.getScene().setCursor(Cursor.NONE);
         this.pointer.setVisible(true);
     }
@@ -134,7 +133,7 @@ public class PaintingArea extends StackPane implements Observer {
      *
      * @param e
      */
-    private void onScroll(ScrollEvent e){
+    private void onScroll(ScrollEvent e) {
         double zoomBy = e.getDeltaY() > 0 ? this.zoom * this.zoomFactor
                 : this.zoom / this.zoomFactor;
         this.setScaleX(zoomBy);
@@ -142,11 +141,11 @@ public class PaintingArea extends StackPane implements Observer {
         this.zoom = zoomBy;
     }
 
-    private void onMousePressed(MouseEvent e){
-        if(e.getButton() == MouseButton.SECONDARY) {
-            this.getChildren().remove(pointer);
+    private void onMousePressed(MouseEvent e) {
+        if (e.getButton() == MouseButton.SECONDARY) {
+            this.getChildren().remove(this.pointer);
             this.pointer = new SquarePointer(this.store.getLineWidth());
-            this.getChildren().add((Node) pointer);
+            this.getChildren().add((Node)this.pointer);
             this.pointer.setX(e.getX());
             this.pointer.setY(e.getY());
         }
