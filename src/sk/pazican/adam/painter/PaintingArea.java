@@ -20,13 +20,13 @@ import java.util.Observer;
  * @version 2017.12.12
  */
 public class PaintingArea extends StackPane implements Observer {
+    private final double ZOOM_FACTOR = 2.0;
     private IPointer pointer;
     private PaintingCanvas paintingCanvas;
     private double oldX;
     private double oldY;
     private boolean dragging;
     private double zoom = 1.0;
-    private final double zoomFactor = 2;
     private Store store;
 
     /**
@@ -187,8 +187,8 @@ public class PaintingArea extends StackPane implements Observer {
      * @param e vykonaný ScrollEvent
      */
     private void onScroll(ScrollEvent e) {
-        double zoomBy = e.getDeltaY() > 0 ? this.zoom * this.zoomFactor
-                : this.zoom / this.zoomFactor;
+        double zoomBy = e.getDeltaY() > 0 ? this.zoom * this.ZOOM_FACTOR
+                : this.zoom / this.ZOOM_FACTOR;
         this.setScaleX(zoomBy);
         this.setScaleY(zoomBy);
         this.zoom = zoomBy;

@@ -44,7 +44,7 @@ public class PaintingCanvas extends Canvas {
      * @param x1 konečný x
      * @param y1 konečný y
      */
-    protected void drawLine(double x0, double y0, double x1, double y1) {
+    public void drawLine(double x0, double y0, double x1, double y1) {
         this.lineDrawer.drawLine(x0, y0, x1, y1, this.circleLine);
     }
 
@@ -56,7 +56,7 @@ public class PaintingCanvas extends Canvas {
      * @param x1 konečný x
      * @param y1 konečný y
      */
-    protected void clearLine(double x0, double y0, double x1, double y1) {
+    public void clearLine(double x0, double y0, double x1, double y1) {
         this.lineDrawer.drawLine(x0, y0, x1, y1, this.squareEraser);
     }
 

@@ -12,7 +12,7 @@ import java.util.Observable;
  */
 public final class Store extends Observable {
     private static Store instance = null;
-    private int lineWidth = 4;
+    private int lineWidth = 5;
     private Color brushColor = Color.FORESTGREEN;
 
     /**
