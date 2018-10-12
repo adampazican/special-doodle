@@ -1,4 +1,4 @@
-# Java-paint
+# Special Doodle
 
 Simple application for sketching or drawing. The main purpose of application was to serve as semestral project
 
